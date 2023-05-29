@@ -1,2 +1,2 @@
-# coding-test
-네이버 부스트캠프 대비 코딩테스트 준비 및 코딩테스트 풀이
+# Algorithm
+Algorithm 문제 풀이 저장소
