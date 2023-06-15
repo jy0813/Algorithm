@@ -150,7 +150,44 @@ function solution(arr) {
     return memory.match(/.{1,8}/g).join(',')
 }
 
+function solution(arr) {
+    let memory = '';
+    const CONTAINER_BUFFER = 8;
+    const MAX_BYTE = 128;
+    const dataSize = {
+        BOOL: () => assignData(1),
+        SHORT: () => assignData(2),
+        FLOAT: () => assignData(4),
+        INT: () => assignData(8),
+        LONG: () => {
+            assignData(8),
+                assignData(8)
+        },
+    }
 
+    const assignData = (dataSize) => {
+        while (memory.length % dataSize !== 0) {
+            memory += '.';
+        }
+
+        for (let i = 0; i < dataSize; i++) {
+            memory += '#';
+        }
+    }
+
+    for(const type of arr) {
+        dataSize[type]();
+    }
+
+    while (memory.length % CONTAINER_BUFFER !== 0) {
+        memory += '.';
+    }
+
+    if(memory.length > MAX_BYTE) return "HALT";
+
+    return memory.match(/.{1,8}/g).join(',')
+
+}
 
 
 function test(dataArray) {
